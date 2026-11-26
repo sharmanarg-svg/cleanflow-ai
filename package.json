@@ -1,0 +1,1 @@
+{"description":"CLEANFLOW AI cleaning services web app","engines":{"node":">=18"},"name":"cleanflow-ai","private":true,"scripts":{"start":"node server.js","test":"node --check server.js && node --check public/app.js"},"version":"1.0.0"}

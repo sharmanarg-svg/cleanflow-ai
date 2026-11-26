@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CLEANFLOW AI</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav>
+      <strong>CLEANFLOW AI</strong>
+      <span>Home & office cleaning</span>
+    </nav>
+    <div class="hero-grid">
+      <section>
+        <p class="eyebrow">AI-powered cleaning platform</p>
+        <h1>Book a cleaner home or office in minutes.</h1>
+        <p class="lead">Browse services, get an instant estimate, submit a booking request, and ask the assistant about pricing, scheduling, and the cleaning process.</p>
+        <div class="actions">
+          <a href="#estimate">Get an estimate</a>
+          <a class="secondary" href="#assistant">Ask the assistant</a>
+        </div>
+      </section>
+      <aside class="summary-card">
+        <h2>Popular services</h2>
+        <ul>
+          <li>Standard Home Cleaning — from $129</li>
+          <li>Deep Cleaning — from $249</li>
+          <li>Office Cleaning — from $179</li>
+          <li>Airbnb Turnover — from $99</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Services</h2>
+      <div id="services" class="grid"></div>
+    </section>
+
+    <section id="estimate" class="panel">
+      <div>
+        <h2>Price estimate</h2>
+        <label>Service <select id="service"></select></label>
+        <label>Property type <select id="propertyType"></select></label>
+        <div class="row">
+          <label>Bedrooms <input id="bedrooms" type="number" min="0" max="10" value="2" /></label>
+          <label>Bathrooms <input id="bathrooms" type="number" min="0" max="10" step="0.5" value="1" /></label>
+          <label>Square feet <input id="squareFeet" type="number" min="200" max="10000" step="50" value="1000" /></label>
+        </div>
+        <label>Frequency <select id="frequency"></select></label>
+        <fieldset>
+          <legend>Add-ons</legend>
+          <div id="addOns" class="checks"></div>
+        </fieldset>
+      </div>
+      <aside class="estimate-box">
+        <h3>Estimated price</h3>
+        <p id="estimateRange" class="price">Loading…</p>
+        <p id="estimateDuration"></p>
+        <ul id="estimateLines"></ul>
+        <p class="note">Approximate estimate. Final price is confirmed before cleaning starts.</p>
+      </aside>
+    </section>
+
+    <section class="panel">
+      <div>
+        <h2>Booking request</h2>
+        <form id="bookingForm">
+          <div class="row">
+            <label>Name <input name="customerName" required /></label>
+            <label>Email <input name="customerEmail" type="email" required /></label>
+            <label>Phone <input name="customerPhone" /></label>
+          </div>
+          <div class="row">
+            <label>Date <input name="preferredDate" type="date" required /></label>
+            <label>Time <select name="preferredTime" id="timeSlots" required></select></label>
+            <label>City <input name="city" /></label>
+          </div>
+          <label>Address <input name="address" /></label>
+          <label>Notes <textarea name="notes" rows="3"></textarea></label>
+          <button type="submit">Submit booking request</button>
+        </form>
+      </div>
+      <aside class="estimate-box">
+        <h3>Confirmation</h3>
+        <div id="bookingResult">Your booking reference will appear here after submission.</div>
+      </aside>
+    </section>
+
+    <section id="assistant" class="panel">
+      <div>
+        <h2>AI assistant</h2>
+        <div id="chat" class="chat"></div>
+        <form id="chatForm" class="chat-form">
+          <input id="chatInput" placeholder="Ask about services, pricing, scheduling, or process" />
+          <button type="submit">Ask</button>
+        </form>
+      </div>
+      <aside class="estimate-box">
+        <h3>Try asking</h3>
+        <button class="suggestion" type="button">How much is a deep cleaning?</button>
+        <button class="suggestion" type="button">How far in advance should I book?</button>
+        <button class="suggestion" type="button">Do you bring cleaning supplies?</button>
+        <button class="suggestion" type="button">How long does office cleaning take?</button>
+      </aside>
+    </section>
+  </main>
+
+  <footer>CLEANFLOW AI — cleaning services for homes and offices.</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

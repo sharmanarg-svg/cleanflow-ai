@@ -1,0 +1,4 @@
+node_modules/
+data/bookings.json
+*.log
+.DS_Store
