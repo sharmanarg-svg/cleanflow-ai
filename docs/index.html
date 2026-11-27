@@ -3,99 +3,142 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CLEANFLOW AI — Live Demo</title>
+  <title>CLEANFLOW AI — Cleaning Services</title>
   <style>
-    :root{--ink:#12312b;--muted:#5f7370;--brand:#0f766e;--brand2:#14b8a6;--bg:#f4fbf9;--card:#fff;--line:#d7ece8}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#ecfdf5,#fff 55%)}
-    header{padding:28px 20px 10px;max-width:1120px;margin:auto}.badge{display:inline-block;background:#ccfbf1;color:#115e59;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
-    h1{font-size:clamp(34px,6vw,64px);line-height:1;margin:14px 0 10px} .sub{color:var(--muted);font-size:18px;max-width:760px}
-    main{max-width:1120px;margin:auto;padding:18px 20px 42px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 10px 30px rgba(15,118,110,.08)}
-    .price{font-size:28px;font-weight:800;color:var(--brand)} .muted{color:var(--muted)} .layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:18px}@media(max-width:820px){.layout{grid-template-columns:1fr}}
-    label{display:block;font-weight:700;margin:12px 0 6px} select,input,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff} button{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;margin-top:14px} button:hover{background:#115e59}
-    .result{background:#f0fdfa;border:1px dashed #99f6e4;border-radius:16px;padding:14px;margin-top:14px}.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e6f4f1;padding:7px 0}.row:last-child{border-bottom:0}
-    .chat{height:260px;overflow:auto;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfffe}.msg{margin:10px 0}.msg b{color:var(--brand)} .quick{display:flex;flex-wrap:wrap;gap:8px}.quick button{background:#ecfdf5;color:#115e59;border:1px solid #99f6e4;margin-top:8px;padding:8px 12px}
-    footer{max-width:1120px;margin:auto;padding:0 20px 28px;color:var(--muted)}
+    :root{--ink:#12312b;--muted:#5f7370;--brand:#0f766e;--brand2:#14b8a6;--bg:#f4fbf9;--card:#fff;--line:#d7ece8;--soft:#ecfdf5}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#ecfdf5,#fff 58%)}
+    a{color:var(--brand);font-weight:700;text-decoration:none} header{max-width:1160px;margin:auto;padding:26px 20px 8px}.nav{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.logo{font-weight:900;letter-spacing:.04em}.badge{display:inline-block;background:#ccfbf1;color:#115e59;padding:6px 10px;border-radius:999px;font-weight:800;font-size:13px}
+    h1{font-size:clamp(36px,6vw,68px);line-height:1;margin:18px 0 12px}.sub{color:var(--muted);font-size:18px;max-width:780px;line-height:1.55}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:#115e59;border:1px solid #99f6e4}
+    main{max-width:1160px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,118,110,.08)}.tag{display:inline-block;background:var(--soft);color:#115e59;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800}.price{font-size:28px;font-weight:900;color:var(--brand);margin:8px 0}.muted{color:var(--muted);line-height:1.5} ul{padding-left:18px;line-height:1.55}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px}@media(max-width:860px){.layout{grid-template-columns:1fr}}
+    label{display:block;font-weight:800;margin:12px 0 6px} select,input,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}.check{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fbfffe}.check input{width:auto}.result{background:#f0fdfa;border:1px dashed #99f6e4;border-radius:16px;padding:14px;margin-top:14px}.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e6f4f1;padding:7px 0}.row:last-child{border-bottom:0}.total{font-size:22px;font-weight:900;color:var(--brand)}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.num{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:900}.chat{height:280px;overflow:auto;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfffe}.msg{margin:10px 0;line-height:1.5}.msg b{color:var(--brand)}.quick{display:flex;flex-wrap:wrap;gap:8px}.quick button{background:#ecfdf5;color:#115e59;border:1px solid #99f6e4;border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer;margin-top:8px}.faq details{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0;background:#fff}.faq summary{font-weight:900;cursor:pointer} footer{max-width:1160px;margin:auto;padding:6px 20px 30px;color:var(--muted)}
   </style>
 </head>
 <body>
 <header>
-  <span class="badge">Live demo for class</span>
-  <h1>CLEANFLOW AI</h1>
-  <p class="sub">Home and office cleaning services with instant approximate pricing, booking requests, and an assistant for service, price, scheduling, and process questions.</p>
+  <div class="nav"><div class="logo">CLEANFLOW AI</div><nav><a href="#services">Services</a> · <a href="#estimate">Price estimate</a> · <a href="#booking">Booking</a> · <a href="#assistant">Assistant</a></nav></div>
+  <span class="badge">Home & office cleaning</span>
+  <h1>Book a cleaner home or office in minutes.</h1>
+  <p class="sub">View services, get an instant approximate price, submit a booking request, and ask the assistant about services, scheduling, pricing, and the cleaning process.</p>
+  <div class="actions"><a class="btn" href="#estimate">Get price estimate</a><a class="btn secondary" href="#booking">Book cleaning</a></div>
 </header>
 <main>
-  <section class="grid" id="services"></section>
+  <h2 id="services">Services</h2>
+  <section class="grid" id="serviceCards"></section>
+
   <section class="layout">
-    <div class="card">
+    <div class="card" id="estimate">
       <h2>Instant price estimate</h2>
+      <p class="muted">The estimate is approximate. The final price is confirmed before the cleaning starts.</p>
       <label>Service</label><select id="service"></select>
       <label>Property type</label><select id="property"><option>House</option><option>Condo / Apartment</option><option>Townhouse</option><option>Office</option></select>
       <label>Bedrooms</label><input id="bedrooms" type="number" min="0" value="3">
       <label>Bathrooms</label><input id="bathrooms" type="number" min="0" step="0.5" value="2">
       <label>Square feet</label><input id="sqft" type="number" min="0" value="1800">
-      <label>Frequency</label><select id="frequency"><option value="1">One-time</option><option value="0.95">Monthly</option><option value="0.9" selected>Every 2 weeks</option><option value="0.85">Weekly</option></select>
-      <label>Add-on</label><select id="addon"><option value="0">None</option><option value="35">Inside oven cleaning — $35</option><option value="30">Inside fridge cleaning — $30</option><option value="45">Interior windows — $45</option><option value="25">Laundry wash & fold — $25</option><option value="40">Carpet shampoo per room — $40</option><option value="25">Pet hair treatment — $25</option><option value="35">Garage sweep-out — $35</option></select>
-      <button onclick="estimate()">Calculate estimate</button>
-      <div class="result" id="estimateResult">Choose options and calculate.</div>
+      <label>Frequency</label><select id="frequency"><option value="1">One-time</option><option value="0.95">Monthly — 5% off</option><option value="0.9" selected>Every 2 weeks — 10% off</option><option value="0.85">Weekly — 15% off</option></select>
+      <label>Add-ons</label><div class="checks" id="addons"></div>
+      <button class="btn" onclick="estimate()">Calculate estimate</button>
+      <div class="result" id="estimateResult"></div>
     </div>
-    <div class="card">
+
+    <div class="card" id="booking">
       <h2>Booking request</h2>
-      <label>Name</label><input id="name" placeholder="Your name">
+      <p class="muted">Submit your preferred service, date, and time. You will receive a booking reference for tracking.</p>
+      <label>Full name</label><input id="name" placeholder="Your name">
       <label>Email</label><input id="email" placeholder="you@example.com">
+      <label>Phone</label><input id="phone" placeholder="Optional">
+      <label>City</label><input id="city" placeholder="Toronto">
       <label>Preferred date</label><input id="date" type="date">
       <label>Preferred time</label><select id="time"><option>Morning (8–11 AM)</option><option>Midday (11 AM–2 PM)</option><option>Afternoon (2–5 PM)</option><option>Evening (5–8 PM)</option></select>
-      <label>Notes</label><textarea id="notes" rows="3" placeholder="Anything we should know?"></textarea>
-      <button onclick="book()">Submit booking request</button>
+      <label>Notes</label><textarea id="notes" rows="3" placeholder="Pets, access instructions, priority areas..."></textarea>
+      <button class="btn" onclick="book()">Submit booking request</button>
       <div class="result" id="bookingResult">Your booking reference will appear here.</div>
     </div>
   </section>
-  <section class="card" style="margin-top:18px">
-    <h2>AI assistant</h2>
-    <div class="chat" id="chat"><p class="msg"><b>Assistant:</b> Ask me about services, pricing, scheduling, or the cleaning process.</p></div>
-    <div class="quick">
-      <button onclick="ask('How much is deep cleaning?')">Deep cleaning price</button>
-      <button onclick="ask('How far in advance should I book?')">Booking time</button>
-      <button onclick="ask('Do you bring supplies?')">Supplies</button>
-      <button onclick="ask('Can I reschedule?')">Reschedule</button>
+
+  <h2>How it works</h2>
+  <section class="steps">
+    <div class="step"><div class="num">1</div><h3>Choose a service</h3><p class="muted">Pick standard, deep, move-in/out, office, Airbnb, or post-construction cleaning.</p></div>
+    <div class="step"><div class="num">2</div><h3>Get an estimate</h3><p class="muted">Enter size, rooms, frequency, and add-ons for an instant approximate range.</p></div>
+    <div class="step"><div class="num">3</div><h3>Submit booking</h3><p class="muted">Send your preferred date and time and receive a booking reference.</p></div>
+    <div class="step"><div class="num">4</div><h3>Confirm and clean</h3><p class="muted">The team confirms the final price and schedule before the cleaning starts.</p></div>
+  </section>
+
+  <section class="layout">
+    <div class="card faq">
+      <h2>Frequently asked questions</h2>
+      <details><summary>How is the price calculated?</summary><p class="muted">The estimate depends on service type, size, bedrooms, bathrooms, frequency, and add-ons. The final price is confirmed before cleaning starts.</p></details>
+      <details><summary>How far in advance should I book?</summary><p class="muted">You can request a preferred date and time in the booking form. Same-day or next-day availability depends on schedule and service area.</p></details>
+      <details><summary>Do you bring cleaning supplies?</summary><p class="muted">Yes, standard supplies and equipment can be included. Add a note if you prefer specific products.</p></details>
+      <details><summary>How long does cleaning take?</summary><p class="muted">A standard home cleaning usually takes about 2 hours. Deep, move-out, office, and post-construction cleanings take longer depending on size and condition.</p></details>
+      <details><summary>Can I reschedule?</summary><p class="muted">Yes. Send a reschedule request as early as possible so the team can confirm a new time.</p></details>
     </div>
-    <label>Your question</label><input id="question" placeholder="Type a question">
-    <button onclick="ask(document.getElementById('question').value)">Ask</button>
+    <div class="card" id="assistant">
+      <h2>AI assistant</h2>
+      <div class="chat" id="chat"><p class="msg"><b>Assistant:</b> Ask me about services, pricing, scheduling, supplies, duration, or rescheduling.</p></div>
+      <div class="quick">
+        <button onclick="ask('How much is deep cleaning?')">Deep cleaning price</button>
+        <button onclick="ask('Which service is best for moving out?')">Moving out</button>
+        <button onclick="ask('How far in advance should I book?')">Booking time</button>
+        <button onclick="ask('Do you bring supplies?')">Supplies</button>
+        <button onclick="ask('Can I reschedule?')">Reschedule</button>
+      </div>
+      <label>Your question</label><input id="question" placeholder="Type a question">
+      <button class="btn" onclick="ask(document.getElementById('question').value)">Ask</button>
+    </div>
   </section>
 </main>
-<footer>Demo note: this public page runs in the browser for class presentation. The full Node.js version is in the GitHub repository.</footer>
+<footer>CLEANFLOW AI — English demo for home and office cleaning services. Repository: <a href="https://github.com/sharmanarg-svg/cleanflow-ai">github.com/sharmanarg-svg/cleanflow-ai</a></footer>
 <script>
 const services=[
- {name:'Standard Home Cleaning',price:129,mins:120,desc:'Regular cleaning for homes and condos.'},
- {name:'Deep Cleaning',price:249,mins:240,desc:'Detailed top-to-bottom cleaning.'},
- {name:'Move-In / Move-Out Cleaning',price:299,mins:300,desc:'Cleaning for empty homes before or after moving.'},
- {name:'Office Cleaning',price:179,mins:180,desc:'Scheduled cleaning for offices and small workplaces.'},
- {name:'Airbnb Turnover',price:99,mins:90,desc:'Fast turnover cleaning and guest-ready reset.'},
- {name:'Post-Construction Cleaning',price:399,mins:360,desc:'Dust and debris cleanup after renovation.'}
+ {name:'Standard Home Cleaning',category:'Home',tagline:'Regular upkeep for busy homes',price:129,mins:120,popular:true,desc:'Regular cleaning for homes and condos, including kitchens, bathrooms, floors, and living areas.',includes:['Kitchen surfaces and sink','Bathroom cleaning and disinfection','Dusting and vacuuming','Mopping hard floors']},
+ {name:'Deep Cleaning',category:'Home',tagline:'Top-to-bottom detail cleaning',price:249,mins:240,popular:true,desc:'Detailed top-to-bottom cleaning for kitchens, bathrooms, baseboards, and hard-to-reach areas.',includes:['Detailed kitchen degreasing','Bathroom scale and grout attention','Baseboards and vents','Inside reachable cabinets on request']},
+ {name:'Move-In / Move-Out Cleaning',category:'Home',tagline:'Empty-home ready cleaning',price:299,mins:300,desc:'Cleaning for empty homes before moving in or after moving out.',includes:['Inside cabinets and drawers','Appliance exterior cleaning','Floors, walls spot-cleaning','Bathroom and kitchen reset']},
+ {name:'Office Cleaning',category:'Office',tagline:'Clean workplaces, flexible schedules',price:179,mins:180,desc:'Scheduled cleaning for offices, clinics, studios, and small workplaces.',includes:['Workstations and common areas','Washrooms and kitchenettes','Trash and recycling','Floor care']},
+ {name:'Airbnb Turnover',category:'Home',tagline:'Guest-ready turnover service',price:99,mins:90,desc:'Fast turnover cleaning, linen reset, and guest-ready preparation.',includes:['Bed and linen reset','Bathroom refresh','Kitchen reset','Guest-ready final check']},
+ {name:'Post-Construction Cleaning',category:'Specialty',tagline:'Dust and debris cleanup',price:399,mins:360,desc:'Dust and debris cleanup after renovation or construction work.',includes:['Fine dust removal','Debris bagging','Window and surface detailing','Floor finishing clean']}
 ];
+const addons=[['Inside oven cleaning',35],['Inside fridge cleaning',30],['Interior windows',45],['Laundry wash & fold',25],['Carpet shampoo (per room)',40],['Pet hair treatment',25],['Garage sweep-out',35]];
 const serviceEl=document.getElementById('service');
-services.forEach((s,i)=>{serviceEl.innerHTML+=`<option value="${i}">${s.name} — from $${s.price}</option>`;document.getElementById('services').innerHTML+=`<article class="card"><h3>${s.name}</h3><p class="muted">${s.desc}</p><p class="price">from $${s.price}</p><p class="muted">About ${Math.round(s.mins/60*10)/10} hours</p></article>`});
+services.forEach((s,i)=>{
+ serviceEl.innerHTML+=`<option value="${i}">${s.name} — from $${s.price}</option>`;
+ document.getElementById('serviceCards').innerHTML+=`<article class="card"><span class="tag">${s.category}${s.popular?' · Popular':''}</span><h3>${s.name}</h3><p class="muted"><b>${s.tagline}</b><br>${s.desc}</p><p class="price">from $${s.price}</p><p class="muted">About ${Math.round(s.mins/60*10)/10} hours</p><ul>${s.includes.map(x=>`<li>${x}</li>`).join('')}</ul><button class="btn secondary" onclick="chooseService(${i})">Estimate this service</button></article>`;
+});
+addons.forEach((a,i)=>{document.getElementById('addons').innerHTML+=`<label class="check"><input type="checkbox" class="addon" value="${a[1]}" data-name="${a[0]}" ${i===0?'checked':''}> ${a[0]} — $${a[1]}</label>`});
 serviceEl.value='1';
+function chooseService(i){serviceEl.value=String(i);estimate();document.getElementById('estimate').scrollIntoView({behavior:'smooth'});}
 function money(n){return '$'+Math.round(n).toLocaleString('en-CA')}
 function estimate(){
- const s=services[Number(serviceEl.value)]; const bed=Number(document.getElementById('bedrooms').value||0); const bath=Number(document.getElementById('bathrooms').value||0); const sqft=Number(document.getElementById('sqft').value||0); const freq=Number(document.getElementById('frequency').value); const addon=Number(document.getElementById('addon').value);
- const lines=[[s.name+' base',s.price]]; if(bed>2)lines.push([`Bedrooms over 2 (${bed-2} extra)`,(bed-2)*25]); if(bath>1)lines.push([`Bathrooms over 1`,(bath-1)*20]); if(sqft>1000)lines.push([`Floor area over 1,000 sq ft`,Math.ceil((sqft-1000)/500)*15]); if(addon)lines.push(['Selected add-on',addon]);
- let subtotal=lines.reduce((a,l)=>a+l[1],0); let total=subtotal*freq; if(freq<1)lines.push(['Frequency discount',-(subtotal-total)]);
+ const s=services[Number(serviceEl.value)]; const bed=Number(document.getElementById('bedrooms').value||0); const bath=Number(document.getElementById('bathrooms').value||0); const sqft=Number(document.getElementById('sqft').value||0); const freq=Number(document.getElementById('frequency').value);
+ const lines=[[s.name+' base',s.price]]; if(bed>2)lines.push([`Bedrooms over 2 (${bed-2} extra)`,(bed-2)*25]); if(bath>1)lines.push([`Bathrooms over 1`,(bath-1)*20]); if(sqft>1000)lines.push([`Floor area over 1,000 sq ft`,Math.ceil((sqft-1000)/500)*15]);
+ document.querySelectorAll('.addon:checked').forEach(a=>lines.push([a.dataset.name,Number(a.value)]));
+ const subtotal=lines.reduce((a,l)=>a+l[1],0); const total=subtotal*freq; if(freq<1)lines.push(['Frequency discount',-(subtotal-total)]);
  const low=total*.9, high=total*1.1; const mins=s.mins+Math.max(0,bed-2)*20+Math.max(0,bath-1)*15+Math.max(0,Math.ceil((sqft-1000)/500))*10;
- document.getElementById('estimateResult').innerHTML=`<strong>Estimated range: ${money(low)}–${money(high)}</strong><p class="muted">Estimated time: about ${Math.round(mins/60*10)/10} hours. Final price is confirmed before cleaning starts.</p>`+lines.map(l=>`<div class="row"><span>${l[0]}</span><span>${l[1]<0?'-':''}${money(Math.abs(l[1]))}</span></div>`).join('');
- return {low,high};
+ document.getElementById('estimateResult').innerHTML=`<p class="total">Estimated range: ${money(low)}–${money(high)}</p><p class="muted">Estimated time: about ${Math.round(mins/60*10)/10} hours. Final price is confirmed before cleaning starts.</p>`+lines.map(l=>`<div class="row"><span>${l[0]}</span><span>${l[1]<0?'-':''}${money(Math.abs(l[1]))}</span></div>`).join('');
+ return {service:s,low,high,mins};
 }
 function book(){
- const name=document.getElementById('name').value.trim(); const email=document.getElementById('email').value.trim(); const est=estimate(); const ref='CF-'+Math.floor(1000+Math.random()*9000);
- document.getElementById('bookingResult').innerHTML=`<strong>Booking request received.</strong><p>Reference: <b>${ref}</b></p><p class="muted">${name?name+', ':''}we will confirm the final price and schedule before the cleaning starts. Estimated range: ${money(est.low)}–${money(est.high)}.</p>`;
+ const name=document.getElementById('name').value.trim(); const email=document.getElementById('email').value.trim(); const date=document.getElementById('date').value; const time=document.getElementById('time').value; const city=document.getElementById('city').value.trim();
+ if(!name||!email||!date){document.getElementById('bookingResult').innerHTML='<strong>Please add your name, email, and preferred date.</strong>';return;}
+ const est=estimate(); const ref='CF-'+Math.floor(1000+Math.random()*9000);
+ const booking={ref,name,email,date,time,city,service:est.service.name,low:Math.round(est.low),high:Math.round(est.high)};
+ try{const all=JSON.parse(localStorage.getItem('cleanflowBookings')||'[]');all.push(booking);localStorage.setItem('cleanflowBookings',JSON.stringify(all));}catch(e){}
+ document.getElementById('bookingResult').innerHTML=`<strong>Booking request received.</strong><p>Reference: <b>${ref}</b></p><p class="muted">${name}, your ${est.service.name} request for ${date} (${time})${city?' in '+city:''} is recorded for this demo. Estimated range: ${money(est.low)}–${money(est.high)}. The team confirms final price and schedule before cleaning starts.</p>`;
 }
 function answer(q){
  q=(q||'').toLowerCase();
- if(q.includes('deep'))return 'Deep Cleaning starts from $249 and usually takes about 4 hours. Use the estimator for an approximate range based on size and add-ons.';
- if(q.includes('price')||q.includes('cost')||q.includes('much'))return 'Prices depend on service type, size, bedrooms, bathrooms, frequency, and add-ons. The estimator shows an approximate range, and the final price is confirmed before cleaning starts.';
- if(q.includes('book')||q.includes('advance')||q.includes('schedule'))return 'You can request a preferred date and time in the booking form. Same-day or next-day availability depends on the schedule and service area.';
+ const found=services.find(s=>q.includes(s.name.toLowerCase().split(' ')[0])||q.includes(s.name.toLowerCase()));
+ if(q.includes('deep'))return 'Deep Cleaning starts from $249 and usually takes about 4 hours. It includes detailed kitchen and bathroom cleaning, baseboards, vents, and hard-to-reach areas. Use the estimator for an approximate range.';
+ if(q.includes('move'))return 'Move-In / Move-Out Cleaning starts from $299 and is best for empty homes. It includes inside cabinets and drawers, appliance exteriors, bathroom and kitchen reset, and floor cleaning.';
+ if(q.includes('office'))return 'Office Cleaning starts from $179 and covers workstations, common areas, washrooms, kitchenettes, trash, recycling, and floor care.';
+ if(q.includes('airbnb'))return 'Airbnb Turnover starts from $99 and focuses on a fast guest-ready reset: beds and linens, bathroom refresh, kitchen reset, and final check.';
+ if(q.includes('construction')||q.includes('renovation'))return 'Post-Construction Cleaning starts from $399 and handles fine dust, debris bagging, surface detailing, and floor finishing after renovation work.';
+ if(q.includes('price')||q.includes('cost')||q.includes('much'))return 'Prices depend on service type, size, bedrooms, bathrooms, frequency, and add-ons. Standard Home Cleaning starts from $129, Deep Cleaning from $249, and Office Cleaning from $179. The estimator shows an approximate range.';
+ if(q.includes('book')||q.includes('advance')||q.includes('schedule')||q.includes('time'))return 'You can request a preferred date and time in the booking form. Same-day or next-day availability depends on the schedule and service area.';
  if(q.includes('suppl'))return 'Yes, standard cleaning supplies and equipment can be included. Add a note if you prefer specific products.';
  if(q.includes('reschedule'))return 'Yes, you can request rescheduling. Send the request as early as possible so the team can confirm a new time.';
- return 'I can help with services, pricing, scheduling, supplies, duration, and rescheduling. Standard Home Cleaning starts from $129, Deep Cleaning from $249, and Office Cleaning from $179.';
+ if(found)return `${found.name} starts from $${found.price} and takes about ${Math.round(found.mins/60*10)/10} hours. ${found.desc}`;
+ return 'I can help with services, pricing, scheduling, supplies, duration, and rescheduling. Try asking about deep cleaning, office cleaning, booking time, or supplies.';
 }
 function ask(q){ if(!q)return; const chat=document.getElementById('chat'); chat.innerHTML+=`<p class="msg"><b>You:</b> ${q}</p><p class="msg"><b>Assistant:</b> ${answer(q)}</p>`; chat.scrollTop=chat.scrollHeight; document.getElementById('question').value=''; }
 estimate();
